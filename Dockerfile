@@ -1,4 +1,4 @@
-FROM golang:1.22-alpine AS builder
+FROM arm64v8/golang:1.21.12-alpine AS builder
 
 WORKDIR /tmp
 
@@ -20,8 +20,6 @@ RUN mkdir -p /tmp/bin && \
   mv /tmp/dumbproxy/dumbproxy /tmp/bin/proxy && \
   mv /tmp/socks5/socks5 /tmp/bin/socks5 && \
   rm -rf /tmp/dumbproxy /tmp/socks5
-
-FROM ich777/debian-baseimage
 
 COPY --from=builder /tmp/bin/ /usr/bin/
 
